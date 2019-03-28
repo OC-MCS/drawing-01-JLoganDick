@@ -11,21 +11,34 @@ enum ShapeEnum { CIRCLE, SQUARE };
 class SettingsMgr
 {
 private:
-	
+	ShapeEnum curShape;
+	Color curColor;
 public:
+	
+
 	SettingsMgr(Color startingColor, ShapeEnum startingShape )
 	{
+		curColor = startingColor;
+		curShape = startingShape;
 	}
 
 	Color getCurColor()
 	{
-		return Color::Blue; // just to make it compile 
+		return curColor; // just to make it compile 
 	}
 
 
 	ShapeEnum getCurShape()
 	{
-		return ShapeEnum::CIRCLE; // just to make it compile;
+		return curShape; // just to make it compile;
+	}
+
+	void setCurShape(ShapeEnum shape) {
+		curShape = shape;
+	}
+
+	void setCurColor(Color col) {
+		curColor = col;
 	}
 
 };
