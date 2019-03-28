@@ -29,6 +29,8 @@ int main()
 	DrawingUI   drawingUI(Vector2f(200, 50));
 	
 	// ********* Add code here to make the managers read from shapes file (if the file exists)
+	shapeMgr.readFile();
+
 
 	while (window.isOpen()) 
 	{
@@ -39,6 +41,7 @@ int main()
 			{
 				window.close();
 				// ****** Add code here to write all data to shapes file
+				shapeMgr.saveFile();
 			}
 			else if (event.type == Event::MouseButtonReleased)
 			{

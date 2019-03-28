@@ -41,4 +41,8 @@ public:
 		curColor = col;
 	}
 
+	void saveSettings() {
+
+	}
+
 };
