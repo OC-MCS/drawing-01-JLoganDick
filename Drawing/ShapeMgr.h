@@ -14,14 +14,12 @@ class ShapeMgr
 private:
 	
 public:
-
+	// holds all shapes to be redrawn next frame
 	vector <DrawingShape*> shapeHolder;
 
 	ShapeMgr()
-	{
-		
-	}
-
+	{}
+	// adds a shape that has been drawn to the shapeHolder Vector
 	void addShape(Vector2f pos, ShapeEnum whichShape, Color color)
 	{
 		if (whichShape == CIRCLE) {
@@ -37,24 +35,21 @@ public:
 
 	}
 
-	void saveFile() {
+	// saves shapes to the file
+	void saveFile(fstream& outfile) {
 		filewrite tempData;
-		ofstream outfile;
-		outfile.open("shapes.bin", ios::out | ios::binary);
+		
 
 		for (int i = 0; i < shapeHolder.size(); i++) {
 			tempData = shapeHolder[i]->getFileRecord();
 			outfile.write(reinterpret_cast<char*> (&tempData), sizeof(tempData));
 		}
-		outfile.close();
 	}
 
 
-
-	void readFile() {
+	// reads shapes from the file
+	void readFile(fstream& infile) {
 		filewrite tempData;
-		ifstream infile;
-		infile.open("shapes.bin", ios::in | ios::binary);
 		
 			while (infile.read(reinterpret_cast<char*> (&tempData), sizeof(tempData))) {
 				Color aColor(tempData.colNum);
@@ -70,8 +65,5 @@ public:
 					shapeHolder.push_back(newSquare);
 				}
 			}
-		infile.close();
 	}
-
-
 };

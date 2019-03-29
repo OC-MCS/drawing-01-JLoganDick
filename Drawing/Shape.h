@@ -30,6 +30,7 @@ public:
 	virtual filewrite getFileRecord() = 0;
 };
 
+// class for circles used for drawing.
 class Circle : public DrawingShape
 {
 public:
@@ -52,6 +53,7 @@ public:
 
 	}
 
+	// converts circle drawing shapes to filewrite type for writing files
 	filewrite getFileRecord() {
 		filewrite temp;
 		Color tempCol = circle.getFillColor();
@@ -64,6 +66,7 @@ public:
 
 };
 
+// class for squares used for drawing
 class Square : public DrawingShape
 {
 public:
@@ -82,6 +85,7 @@ public:
 
 	}
 
+	// converts square drawing shapes to filewrite type for writing files
 	filewrite getFileRecord() {
 		filewrite temp;
 		Color tempCol = square.getFillColor();
@@ -93,8 +97,3 @@ public:
 	}
 
 };
-
-// add Circle, Square classes below. These are derived from DrawingShape
-
-
-

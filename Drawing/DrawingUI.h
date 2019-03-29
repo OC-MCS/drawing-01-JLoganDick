@@ -18,6 +18,7 @@ public:
 
 	}
 
+	// draws border for settings menu and drawing area
 	void draw(RenderWindow& win, ShapeMgr *mgr)
 	{
 		// Draw outter border
@@ -44,15 +45,14 @@ public:
 
 	}
 	
+	// checks if the mouse is in the draw area
 	bool isMouseInCanvas(Vector2f mousePos)
 	{
 		bool inCanvas = false;
 		if (mousePos.x >= 265 && mousePos.x <= 747 && mousePos.y >= 13 && mousePos.y <= 547) {
 			inCanvas = true;
 		}
-
 		return inCanvas;
 	}
-
 };
 

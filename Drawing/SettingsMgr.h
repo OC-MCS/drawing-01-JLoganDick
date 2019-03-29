@@ -6,7 +6,12 @@ using namespace sf;
 
 enum ShapeEnum { CIRCLE, SQUARE };
 
-// finish this code; add functions, data as needed
+//Structure that holds the settings for writing to a file
+struct settings {
+	ShapeEnum shape;
+	int numColor;
+};
+
 
 class SettingsMgr
 {
@@ -21,28 +26,53 @@ public:
 		curColor = startingColor;
 		curShape = startingShape;
 	}
-
+	
+	// getter function returning curColor
 	Color getCurColor()
 	{
-		return curColor; // just to make it compile 
+		return curColor;  
 	}
 
-
+	// getter function returning curShape
 	ShapeEnum getCurShape()
 	{
-		return curShape; // just to make it compile;
+		return curShape; 
 	}
 
+	// setter function assigning curShape
 	void setCurShape(ShapeEnum shape) {
 		curShape = shape;
 	}
 
+	// setter function assigning curColor
 	void setCurColor(Color col) {
 		curColor = col;
 	}
 
-	void saveSettings() {
 
+	// funciton that saves settings to file
+	void saveSettings(fstream& outfile) {
+		settings tempSet;
+		tempSet.shape = curShape;
+		tempSet.numColor = curColor.toInteger();
+
+		outfile.write(reinterpret_cast<char*> (&tempSet), sizeof(tempSet));
+	}
+
+	// function that reads settings from file
+	void readSettings(fstream& infile) {
+		settings tempSet;
+
+		if (infile.read(reinterpret_cast<char*> (&tempSet), sizeof(tempSet))) { // sets colors from file
+			Color aColor(tempSet.numColor);
+
+			curColor = aColor;
+			curShape = tempSet.shape;
+		}
+		else { // sets default settings
+			curColor = Color::Blue;
+			curShape = CIRCLE;
+		}
 	}
 
 };

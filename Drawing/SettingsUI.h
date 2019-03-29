@@ -28,7 +28,12 @@ public:
 		blueBtn.setRadius(10);
 		blueBtn.setOutlineThickness(2);
 		blueBtn.setOutlineColor(Color::Blue);
-		blueBtn.setFillColor(Color::Blue);
+		if (mgr->getCurColor() == Color::Blue) {
+			blueBtn.setFillColor(Color::Blue);
+		}
+		else {
+			blueBtn.setFillColor(Color::Transparent);
+		}
 
 		// define red button
 		Vector2f pos2(80, 200);
@@ -36,7 +41,13 @@ public:
 		redBtn.setRadius(10);
 		redBtn.setOutlineThickness(2);
 		redBtn.setOutlineColor(Color::Red);
-		redBtn.setFillColor(Color::Transparent);
+		if (mgr->getCurColor() == Color::Red) {
+			redBtn.setFillColor(Color::Red);
+		}
+		else {
+			redBtn.setFillColor(Color::Transparent);
+		}
+		
 
 		// draw green button
 		Vector2f pos3(80, 300);
@@ -44,7 +55,12 @@ public:
 		greenBtn.setRadius(10);
 		greenBtn.setOutlineThickness(2);
 		greenBtn.setOutlineColor(Color::Green);
-		greenBtn.setFillColor(Color::Transparent);
+		if (mgr->getCurColor() == Color::Green) {
+			greenBtn.setFillColor(Color::Green);
+		}
+		else {
+			greenBtn.setFillColor(Color::Transparent);
+		}
 
 		// define square shape selection button
 		Vector2f sqPos1(80, 425);
@@ -52,7 +68,12 @@ public:
 		squareBtn.setOutlineColor(Color::White);
 		squareBtn.setOutlineThickness(2);
 		squareBtn.setSize(Vector2f(15, 15));
-		squareBtn.setFillColor(Color::Transparent);
+		if (mgr->getCurShape() == SQUARE) {
+			squareBtn.setFillColor(Color::White);
+		}
+		else {
+			squareBtn.setFillColor(Color::Transparent);
+		}
 
 		// define circle shape selection button
 		Vector2f pos4(80, 525);
@@ -60,8 +81,15 @@ public:
 		circleBtn.setRadius(10);
 		circleBtn.setOutlineThickness(2);
 		circleBtn.setOutlineColor(Color::White);
-		circleBtn.setFillColor(Color::White);
+		if (mgr->getCurShape() == CIRCLE) {
+			circleBtn.setFillColor(Color::White);
+		}
+		else {
+			circleBtn.setFillColor(Color::Transparent);
+		}
 	}
+
+	//Detects when & where the coursor is at the time the left mouse button is released
 	void handleMouseUp(Vector2f mouse)
 	{
 		if (blueBtn.getGlobalBounds().contains(mouse)) {
@@ -99,6 +127,7 @@ public:
 
 	}
 
+	// Draws the buttons and texxt in the settings
 	void draw(RenderWindow& win)
 	{
 		win.draw(blueBtn);
@@ -111,19 +140,19 @@ public:
 		if (!font.loadFromFile("C:\\Windows\\Fonts\\arial.ttf"))
 			die("couldn't load font");
 
-		// title
+		// Color Title
 		Text title("Drawing Color", font, 25);
 		title.setPosition(30, 25);
 		win.draw(title);
 
+		// Size Tidle
 		Text title2("Drawing shape", font, 25);
 		title2.setPosition(30, 350);
 		win.draw(title2);
-
 	}
-
 };
 
+// Function that ends program if there is an error
 void die(string msg)
 {
 	cout << msg << endl;
